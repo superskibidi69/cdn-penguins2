@@ -36,7 +36,7 @@ const cdn0 = Array.from({ length: 29 }, (_, id) =>
 const cdn1 = Array.from({ length: 29 }, (_, i) =>
   `https://cdn-penguins.netlify.app/assets/${i}.jpg`
 );
-const cdn2 = Array.from({ length: 14 }, (_, i) =>
+const cdn2 = Array.from({ length: 15 }, (_, i) =>
   `https://cdn-penguins2.netlify.app/static/${i}.jpg`
 );
 const penguins = [...cdn0, ...cdn1, ...cdn2];
@@ -45,6 +45,7 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 async function loadAllPenguins(delay = 50) {
   for (const url of penguins) {
     const img = document.createElement('img');
+    img.loading= "lazy"
     img.src = url;
     container.appendChild(img);
     await sleep(delay);
