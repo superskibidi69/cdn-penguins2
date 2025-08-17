@@ -1,33 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>All Penguins</title>
-<style>
-  body {
-    font-family: sans-serif;
-    background: #f0f0f0;
-    padding: 20px;
-  }
-  #penguin-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 10px;
-  }
-  img {
-    width: 100%;
-    height: auto;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-  }
-</style>
-</head>
-<body>
-
-<h1>All Penguins</h1>
-<div id="penguin-container"></div>
-
 <script>
 const container = document.getElementById('penguin-container');
 
@@ -41,16 +11,16 @@ const cdn2 = Array.from({ length: 13 }, (_, i) =>
   `https://cdn-penguins2.netlify.app/static/${i}.jpg`
 );
 const penguins = [...cdn0, ...cdn1, ...cdn2];
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-function loadAllPenguins() {
-  penguins.forEach(url => {
+async function loadAllPenguins(delay = 50) {
+  for (const url of penguins) {
     const img = document.createElement('img');
     img.src = url;
     container.appendChild(img);
-  });
+    await sleep(delay);
+  }
 }
+
 loadAllPenguins();
 </script>
-
-</body>
-</html>
